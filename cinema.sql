@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 25-Ago-2020 às 05:29
--- Versão do servidor: 10.4.11-MariaDB
--- versão do PHP: 7.4.4
+-- Tempo de geração: 01-Set-2020 às 00:32
+-- Versão do servidor: 10.4.13-MariaDB
+-- versão do PHP: 7.2.32
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,19 +18,27 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Banco de dados `cinema`
+-- Banco de dados: `cinema`
 --
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `atores`
+-- Estrutura da tabela `ator`
 --
 
-CREATE TABLE `atores` (
+CREATE TABLE `ator` (
   `id` int(11) NOT NULL,
   `nome` varchar(200) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Extraindo dados da tabela `ator`
+--
+
+INSERT INTO `ator` (`id`, `nome`) VALUES
+(1, 'Marcos\r\n'),
+(2, 'Alice');
 
 -- --------------------------------------------------------
 
@@ -54,6 +62,13 @@ CREATE TABLE `diretor` (
   `nome` varchar(200) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Extraindo dados da tabela `diretor`
+--
+
+INSERT INTO `diretor` (`id`, `nome`) VALUES
+(1, 'Jorge');
+
 -- --------------------------------------------------------
 
 --
@@ -61,9 +76,35 @@ CREATE TABLE `diretor` (
 --
 
 CREATE TABLE `elenco` (
-  `id` int(11) NOT NULL,
-  `id_atores` int(11) NOT NULL
+  `id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Extraindo dados da tabela `elenco`
+--
+
+INSERT INTO `elenco` (`id`) VALUES
+(1);
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `elenco_ator`
+--
+
+CREATE TABLE `elenco_ator` (
+  `id` int(11) NOT NULL,
+  `id_ator` int(11) NOT NULL,
+  `id_elenco` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Extraindo dados da tabela `elenco_ator`
+--
+
+INSERT INTO `elenco_ator` (`id`, `id_ator`, `id_elenco`) VALUES
+(1, 1, 1),
+(2, 2, 1);
 
 -- --------------------------------------------------------
 
@@ -78,6 +119,13 @@ CREATE TABLE `filme` (
   `id_elenco` int(11) NOT NULL,
   `id_diretor` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Extraindo dados da tabela `filme`
+--
+
+INSERT INTO `filme` (`id`, `nome`, `sinopse`, `id_elenco`, `id_diretor`) VALUES
+(1, 'Batman', 'Lorem Ipsum is simply dummy text', 1, 1);
 
 -- --------------------------------------------------------
 
@@ -155,9 +203,9 @@ CREATE TABLE `sessao` (
 --
 
 --
--- Índices para tabela `atores`
+-- Índices para tabela `ator`
 --
-ALTER TABLE `atores`
+ALTER TABLE `ator`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -176,8 +224,15 @@ ALTER TABLE `diretor`
 -- Índices para tabela `elenco`
 --
 ALTER TABLE `elenco`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Índices para tabela `elenco_ator`
+--
+ALTER TABLE `elenco_ator`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `id_atores` (`id_atores`);
+  ADD KEY `id_ator` (`id_ator`),
+  ADD KEY `id_elenco` (`id_elenco`);
 
 --
 -- Índices para tabela `filme`
@@ -233,10 +288,10 @@ ALTER TABLE `sessao`
 --
 
 --
--- AUTO_INCREMENT de tabela `atores`
+-- AUTO_INCREMENT de tabela `ator`
 --
-ALTER TABLE `atores`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `ator`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de tabela `bilheteria`
@@ -248,19 +303,25 @@ ALTER TABLE `bilheteria`
 -- AUTO_INCREMENT de tabela `diretor`
 --
 ALTER TABLE `diretor`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de tabela `elenco`
 --
 ALTER TABLE `elenco`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT de tabela `elenco_ator`
+--
+ALTER TABLE `elenco_ator`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de tabela `filme`
 --
 ALTER TABLE `filme`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de tabela `genero`
@@ -291,10 +352,11 @@ ALTER TABLE `sessao`
 --
 
 --
--- Limitadores para a tabela `elenco`
+-- Limitadores para a tabela `elenco_ator`
 --
-ALTER TABLE `elenco`
-  ADD CONSTRAINT `elenco_ibfk_1` FOREIGN KEY (`id_atores`) REFERENCES `atores` (`id`);
+ALTER TABLE `elenco_ator`
+  ADD CONSTRAINT `elenco_ator_ibfk_1` FOREIGN KEY (`id_ator`) REFERENCES `ator` (`id`),
+  ADD CONSTRAINT `elenco_ator_ibfk_2` FOREIGN KEY (`id_elenco`) REFERENCES `elenco` (`id`);
 
 --
 -- Limitadores para a tabela `filme`
