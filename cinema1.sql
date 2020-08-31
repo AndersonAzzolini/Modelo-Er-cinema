@@ -61,8 +61,7 @@ CREATE TABLE `diretor` (
 --
 
 CREATE TABLE `elenco` (
-  `id` int(11) NOT NULL,
-  `id_atores` int(11) NOT NULL
+  `id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -176,8 +175,7 @@ ALTER TABLE `diretor`
 -- Índices para tabela `elenco`
 --
 ALTER TABLE `elenco`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `id_atores` (`id_atores`);
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Índices para tabela `filme`
@@ -289,12 +287,6 @@ ALTER TABLE `sessao`
 --
 -- Restrições para despejos de tabelas
 --
-
---
--- Limitadores para a tabela `elenco`
---
-ALTER TABLE `elenco`
-  ADD CONSTRAINT `elenco_ibfk_1` FOREIGN KEY (`id_atores`) REFERENCES `atores` (`id`);
 
 --
 -- Limitadores para a tabela `filme`
