@@ -24,10 +24,10 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `atores`
+-- Estrutura da tabela `ator`
 --
 
-CREATE TABLE `atores` (
+CREATE TABLE `ator` (
   `id` int(11) NOT NULL,
   `nome` varchar(200) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -154,9 +154,9 @@ CREATE TABLE `sessao` (
 --
 
 --
--- Índices para tabela `atores`
+-- Índices para tabela `ator`
 --
-ALTER TABLE `atores`
+ALTER TABLE `ator`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -231,9 +231,9 @@ ALTER TABLE `sessao`
 --
 
 --
--- AUTO_INCREMENT de tabela `atores`
+-- AUTO_INCREMENT de tabela `ator`
 --
-ALTER TABLE `atores`
+ALTER TABLE `ator`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
