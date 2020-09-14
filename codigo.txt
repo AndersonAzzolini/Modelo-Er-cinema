@@ -1,4 +1,0 @@
-select filme.nome filme, GROUP_CONCAT(DISTINCT genero.descricao ORDER BY genero.descricao ASC SEPARATOR ', ') genero, GROUP_CONCAT(DISTINCT ator.nome ORDER BY ator.nome ASC SEPARATOR ', ') atores, diretor.nome diretor, sessao.nome sessao, sessao.horario horario, sala.nome sala from filme inner join sessao on sessao.id_filme=filme.id inner join ingresso on ingresso.id_sessao=sessao.id inner join sala on sala.id=ingresso.id_sala inner join diretor on diretor.id=filme.id_diretor inner join elenco_ator on filme.id_elenco=elenco_ator.id_elenco inner join ator on ator.id=elenco_ator.id_ator inner join genero_filme on genero_filme.id_filme=filme.id inner join genero on genero.id=genero_filme.id_genero group by filme
-
-
-http://dontpad.com/cinema15
